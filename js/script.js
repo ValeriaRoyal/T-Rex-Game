@@ -40,10 +40,22 @@ function jump() {
 function createCactus() {
     const cactus = document.createElement('div');
     let cactusposicao = 1000;
+    let randomtime = Math.random() * 6000;
 
     cactus.classList.add('cactus');
     cactus.style.left = 1000 + 'px';
     bg.appendChild(cactus);
+
+    let leftInterval = setInterval(() => {
+        if (cactusposicao <= -60) {
+            clearInterval(leftInterval);
+            bg.removeChild(cactus);
+        } else {
+            cactusposicao -= 10;
+            cactus.style.left = cactusposicao + 'px';
+        }
+    },20);
+    setTimeout(createCactus, randomtime);
 }
 createCactus();
 document.addEventListener("keyup", hendelKeyUp);
